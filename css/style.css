@@ -1,0 +1,31 @@
+@font-face {
+    font-family: "MyFont";
+    src: url("/fonts/GameOfThrones.ttf");
+}
+
+.customfont {
+    font-family: "MyFont";
+}
+
+body {
+    background: url(/assets/site/mapblue.jpg) repeat-x 0 0;
+}
+
+.container1>div {
+    float: left;
+    padding: 20px 0px 0px 0px;
+    max-width: 15%;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 7px;
+    margin: 9px 9px;
+}
+
+.container1 {
+    width: 80%;
+}
+
+img {
+    height: 70px;
+
+}

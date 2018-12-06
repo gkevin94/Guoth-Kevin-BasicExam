@@ -13,6 +13,7 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   // Nem szabad globálisba kitenni a userDatas-t!
   var userDatas = JSON.parse(xhttp.responseText);
   // Innen hívhatod meg a többi függvényed
+  portaitMaker(userDatas);
 }
 
 getGameOfThronesCharacterDatas(
@@ -22,3 +23,11 @@ getGameOfThronesCharacterDatas(
 
 // Live servert használd mindig!!!!!
 /* IDE ÍRD A FÜGGVÉNYEKET!!!!!! NE EBBE AZ EGY SORBA HANEM INNEN LEFELÉ! */
+function portaitMaker(data) {
+  var place = document.querySelector('.container1');
+  for (var k in data) {
+    if (data.hasOwnProperty(k) && !data[k].dead) {
+      place.innerHTML += `<div class="portrait"><img src="./${data[k].portrait}" alt="${data[k].name}"><div class="customfont">${data[k].name}</div></div>`;
+    }
+  }
+}
