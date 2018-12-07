@@ -14,8 +14,12 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   var userDatas = JSON.parse(xhttp.responseText);
   // Innen hívhatod meg a többi függvényed
   portaitMaker(userDatas);
-  addEventListener('click', function () {
+  document.querySelector('.left').addEventListener('click', function () {
     clickedVersion(userDatas, valueHolderArray[0]);
+  });
+  createTitleOfRightContainer();
+  document.querySelector('#searchBtn').addEventListener('click', function () {
+    searchForCaracter(userDatas);
   });
 }
 
@@ -27,6 +31,10 @@ getGameOfThronesCharacterDatas(
 // Live servert használd mindig!!!!!
 /* IDE ÍRD A FÜGGVÉNYEKET!!!!!! NE EBBE AZ EGY SORBA HANEM INNEN LEFELÉ! */
 
+function createTitleOfRightContainer() {
+  var paragraph = document.getElementById('titleParagraph');
+  paragraph.innerText = 'Game of Thrones';
+}
 var valueHolderArray = [];
 
 function clicker(value) {
@@ -42,6 +50,7 @@ function portaitMaker(data) {
     }
   }
 }
+
 
 function sortByName(data) {
   var holder;
@@ -73,38 +82,50 @@ function clickedVersion(data, value) {
 }
 
 function pictureDisplay(picture) {
-  var right = document.querySelector('.right');
-  right.innerHTML = '';
+  var place = document.querySelector('.main');
+  place.innerHTML = '';
   var image = document.createElement('img');
   image.src = picture;
   image.alt = name;
-  right.appendChild(image);
-
-
-  console.log(picture);
+  place.appendChild(image);
 }
 
 function nameDisplay(name) {
-  var right = document.querySelector('.right');
+  var place = document.querySelector('.main');
   var para = document.createElement('p');
   para.innerHTML = name;
-  right.appendChild(para);
-  console.log(name);
+  para.className = 'nameParagraph';
+  place.appendChild(para);
 }
 
 function houseDisplay(house) {
-  var right = document.querySelector('.right');
+  var place = document.querySelector('.nameParagraph');
   var logo = document.createElement('img');
   logo.src = `./assets/houses/${house}.png`;
   logo.alt = name;
-  right.querySelector('p').innerHTML = logo;
-  console.log(house);
+  logo.className = 'logo';
+  place.appendChild(logo);
 }
 
 function bioDisplay(bio) {
-  var right = document.querySelector('.right');
+  var place = document.querySelector('.main');
   var bioDiv = document.createElement('div');
   bioDiv.innerHTML = bio;
-  right.appendChild(bioDiv);
-  console.log(bio);
+  place.appendChild(bioDiv);
+}
+
+function searchForCaracter(data) {
+  var inputText = (document.querySelector('#search').value).toLowerCase();
+  if (inputText) {
+    for (var k in data) {
+      if (data.hasOwnProperty(k) && data[k].name.toLowerCase().indexOf(inputText) > -1) {
+        pictureDisplay(data[k].picture);
+        nameDisplay(data[k].name);
+        bioDisplay(data[k].bio);
+        if (data[k].house) {
+          houseDisplay(data[k].house);
+        }
+      }
+    }
+  }
 }
