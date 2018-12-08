@@ -17,9 +17,15 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   document.querySelector('.left').addEventListener('click', function () {
     clickedVersion(userDatas, valueHolderArray[0]);
   });
+
   createTitleOfRightContainer();
+
   document.querySelector('#searchBtn').addEventListener('click', function () {
-    searchForCaracter(userDatas);
+    searchForCharacter(userDatas);
+  });
+
+  document.querySelector('.left').addEventListener('click', function () {
+    addClassToClicked(valueHolderArray[0]);
   });
 }
 
@@ -31,11 +37,12 @@ getGameOfThronesCharacterDatas(
 // Live servert használd mindig!!!!!
 /* IDE ÍRD A FÜGGVÉNYEKET!!!!!! NE EBBE AZ EGY SORBA HANEM INNEN LEFELÉ! */
 
+var valueHolderArray = [];
+
 function createTitleOfRightContainer() {
   var paragraph = document.getElementById('titleParagraph');
   paragraph.innerText = 'Game of Thrones';
 }
-var valueHolderArray = [];
 
 function clicker(value) {
   valueHolderArray[0] = value;
@@ -70,7 +77,7 @@ function clickedVersion(data, value) {
   for (var k in data) {
     if (data.hasOwnProperty(k)) {
       if (data[k].name === value.alt) {
-        pictureDisplay(data[k].picture);
+        pictureDisplay(data[k].picture, data[k].name);
         nameDisplay(data[k].name);
         bioDisplay(data[k].bio);
         if (data[k].house) {
@@ -81,15 +88,6 @@ function clickedVersion(data, value) {
   }
 }
 
-function pictureDisplay(picture) {
-  var place = document.querySelector('.main');
-  place.innerHTML = '';
-  var image = document.createElement('img');
-  image.src = picture;
-  image.alt = name;
-  place.appendChild(image);
-}
-
 function nameDisplay(name) {
   var place = document.querySelector('.main');
   var para = document.createElement('p');
@@ -97,6 +95,17 @@ function nameDisplay(name) {
   para.className = 'nameParagraph';
   place.appendChild(para);
 }
+
+function pictureDisplay(picture, name) {
+  var place = document.querySelector('.main');
+
+  place.innerHTML = '';
+  var image = document.createElement('img');
+  image.src = picture;
+  image.alt = name;
+  place.appendChild(image);
+}
+
 
 function houseDisplay(house) {
   var place = document.querySelector('.nameParagraph');
@@ -114,18 +123,68 @@ function bioDisplay(bio) {
   place.appendChild(bioDiv);
 }
 
-function searchForCaracter(data) {
+function searchForCharacter(data) {
   var inputText = (document.querySelector('#search').value).toLowerCase();
+  var found = false;
   if (inputText) {
     for (var k in data) {
       if (data.hasOwnProperty(k) && data[k].name.toLowerCase().indexOf(inputText) > -1) {
-        pictureDisplay(data[k].picture);
+        pictureDisplay(data[k].picture, data[k].name);
         nameDisplay(data[k].name);
         bioDisplay(data[k].bio);
         if (data[k].house) {
           houseDisplay(data[k].house);
         }
+        found = true;
+        findTheSearchedCharacter(data[k].name);
+        removeClass(data[k].name);
+        break;
+      }
+    }
+    if (found === false) {
+      document.querySelector('.main').innerHTML = '';
+      nameDisplay('Character not found');
+    }
+  }
+}
+
+function findTheSearchedCharacter(name) {
+  var pics = document.querySelectorAll('.left img');
+  for (var k in pics) {
+    if (pics.hasOwnProperty(k)) {
+      if (pics[k].alt === name) {
+        pics[k].classList.add('selected');
+        break;
       }
     }
   }
 }
+
+function addClassToClicked(value) {
+  if (value) {
+    var pics = document.querySelectorAll('.left img');
+    for (const k in pics) {
+      if (pics.hasOwnProperty(k)) {
+        if (pics[k].alt === value.alt) {
+          pics[k].classList.add('selected');
+          removeClass(value.alt);
+          break;
+        }
+      }
+    }
+  }
+}
+
+function removeClass(value) {
+  var classDetected = document.querySelectorAll('.selected');
+  for (var k in classDetected) {
+    if (classDetected.hasOwnProperty(k)) {
+      if (classDetected[k].alt !== value) {
+        classDetected[k].classList.remove('selected');
+      }
+    }
+  }
+}
+// if (classDetected) {
+//   classDetected.classList.remove('selected');
+// }
