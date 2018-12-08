@@ -159,7 +159,7 @@ img {
     white-space: nowrap;
 }
 
-.container-4 input#search {
+.container-4 input#searchInput {
     width: 300px;
     height: 50px;
     background: #2b303b;
@@ -167,13 +167,16 @@ img {
     font-size: 10pt;
     float: left;
     color: #fff;
-    padding-left: 15px;
+    padding-left: 25px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
 
-
+#searchInput::-webkit-search-cancel-button {
+    position: relative;
+    right: 280px;
+}
 
 .container-4 button.icon {
     -webkit-border-top-right-radius: 5px;

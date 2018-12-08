@@ -13,10 +13,8 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
   // Nem szabad globálisba kitenni a userDatas-t!
   var userDatas = JSON.parse(xhttp.responseText);
   // Innen hívhatod meg a többi függvényed
+
   portaitMaker(userDatas);
-  document.querySelector('.left').addEventListener('click', function () {
-    clickedVersion(userDatas, valueHolderArray[0]);
-  });
 
   createTitleOfRightContainer();
 
@@ -24,8 +22,23 @@ function successGetGameOfThronesCharacterDatas(xhttp) {
     searchForCharacter(userDatas);
   });
 
-  document.querySelector('.left').addEventListener('click', function () {
-    addClassToClicked(valueHolderArray[0]);
+  // megkeressük melyik portréra kattintottunk
+  var listener = document.querySelectorAll('.portrait');
+  for (var k in listener) {
+    if (listener.hasOwnProperty(k)) {
+      listener[k].addEventListener('click', function () {
+        var name = this.querySelector('label').innerHTML;
+        searchForTheClickedPortrait(userDatas, name);
+        classAdder(name);
+      });
+    }
+  }
+
+  var input = document.getElementById('searchInput');
+  input.addEventListener('keyup', function () {
+    if (event.keyCode === 13) {
+      searchForCharacter(userDatas);
+    }
   });
 }
 
@@ -37,28 +50,27 @@ getGameOfThronesCharacterDatas(
 // Live servert használd mindig!!!!!
 /* IDE ÍRD A FÜGGVÉNYEKET!!!!!! NE EBBE AZ EGY SORBA HANEM INNEN LEFELÉ! */
 
-var valueHolderArray = [];
-
 function createTitleOfRightContainer() {
   var paragraph = document.getElementById('titleParagraph');
   paragraph.innerText = 'Game of Thrones';
 }
 
-function clicker(value) {
-  valueHolderArray[0] = value;
-}
-
+// kitesszük a portrékat és a neveket
 function portaitMaker(data) {
   sortByName(data);
   var place = document.querySelector('.left');
   for (var k in data) {
     if (data.hasOwnProperty(k) && !data[k].dead) {
-      place.innerHTML += `<div class="portrait"><img onclick="clicker(this)" src="./${data[k].portrait}" alt="${data[k].name}"><div class="customfont"><label>${data[k].name}</label></div></div>`;
+      place.innerHTML += `<div class="portrait"><img src="./${
+        data[k].portrait
+      }" alt="${data[k].name}"><div class="customfont"><label>${
+        data[k].name
+      }</label></div></div>`;
     }
   }
 }
 
-
+// rendezzük név szerint
 function sortByName(data) {
   var holder;
   for (var k = 0; k < data.length; k++) {
@@ -73,10 +85,11 @@ function sortByName(data) {
   return data;
 }
 
-function clickedVersion(data, value) {
+// megkeressük az adatait a kattintott portrénak
+function searchForTheClickedPortrait(data, name) {
   for (var k in data) {
     if (data.hasOwnProperty(k)) {
-      if (data[k].name === value.alt) {
+      if (data[k].name === name) {
         pictureDisplay(data[k].picture, data[k].name);
         nameDisplay(data[k].name);
         bioDisplay(data[k].bio);
@@ -106,7 +119,6 @@ function pictureDisplay(picture, name) {
   place.appendChild(image);
 }
 
-
 function houseDisplay(house) {
   var place = document.querySelector('.nameParagraph');
   var logo = document.createElement('img');
@@ -123,12 +135,16 @@ function bioDisplay(bio) {
   place.appendChild(bioDiv);
 }
 
+// keresőmezőben keresett karakter megkeresése a userDatas-ban
 function searchForCharacter(data) {
-  var inputText = (document.querySelector('#search').value).toLowerCase();
+  var inputText = document.querySelector('#searchInput').value.toLowerCase();
   var found = false;
   if (inputText) {
     for (var k in data) {
-      if (data.hasOwnProperty(k) && data[k].name.toLowerCase().indexOf(inputText) > -1) {
+      if (
+        data.hasOwnProperty(k) &&
+        data[k].name.toLowerCase().indexOf(inputText) > -1
+      ) {
         pictureDisplay(data[k].picture, data[k].name);
         nameDisplay(data[k].name);
         bioDisplay(data[k].bio);
@@ -137,17 +153,19 @@ function searchForCharacter(data) {
         }
         found = true;
         findTheSearchedCharacter(data[k].name);
-        removeClass(data[k].name);
+        classRemover(data[k].name);
         break;
       }
     }
     if (found === false) {
       document.querySelector('.main').innerHTML = '';
       nameDisplay('Character not found');
+      classRemover('');
     }
   }
 }
 
+// keresőmezőben keresett karakter megkeresése a megjelenített portrék között
 function findTheSearchedCharacter(name) {
   var pics = document.querySelectorAll('.left img');
   for (var k in pics) {
@@ -160,14 +178,14 @@ function findTheSearchedCharacter(name) {
   }
 }
 
-function addClassToClicked(value) {
-  if (value) {
+function classAdder(name) {
+  if (name) {
     var pics = document.querySelectorAll('.left img');
     for (const k in pics) {
       if (pics.hasOwnProperty(k)) {
-        if (pics[k].alt === value.alt) {
+        if (pics[k].alt === name) {
           pics[k].classList.add('selected');
-          removeClass(value.alt);
+          classRemover(name);
           break;
         }
       }
@@ -175,7 +193,7 @@ function addClassToClicked(value) {
   }
 }
 
-function removeClass(value) {
+function classRemover(value) {
   var classDetected = document.querySelectorAll('.selected');
   for (var k in classDetected) {
     if (classDetected.hasOwnProperty(k)) {
@@ -185,6 +203,3 @@ function removeClass(value) {
     }
   }
 }
-// if (classDetected) {
-//   classDetected.classList.remove('selected');
-// }
