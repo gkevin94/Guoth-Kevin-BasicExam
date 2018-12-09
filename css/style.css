@@ -1,214 +1,207 @@
 @font-face {
-    font-family: "MyFont";
-    src: url("/fonts/GameOfThrones.ttf");
+  font-family: "MyFont";
+  src: url("/fonts/GameOfThrones.ttf");
 }
 
 .customfont {
-    font-family: "MyFont";
-}
-
-body {
-    background: url(/assets/site/mapblue.jpg) repeat-x 0 0;
+  font-family: "MyFont";
 }
 
 .left {
-    float: left;
-    width: 75%;
+  background-image: url(/assets/site/mapblue.jpg);
+  background-size: cover;
+  float: left;
+  width: 75%;
 }
 
-.left>div {
-    box-sizing: border-box;
-    float: left;
-    font-family: "MyFont";
-    font-size: 9px;
-    margin: 9px 9px;
-    max-width: 15%;
-    padding: 10px 0px 0px 0px;
-    text-align: center;
+.left > div {
+  box-sizing: border-box;
+  float: left;
+  font-family: "MyFont";
+  font-size: 9px;
+  margin: 9px 9px;
+  max-width: 15%;
+  padding: 10px 0px 0px 0px;
+  text-align: center;
 }
 
 .selected {
-    animation: shake 1s;
-    animation-iteration-count: infinite;
+  animation: shake 1s;
+  animation-iteration-count: infinite;
 }
 
 .portrait {
-    float: left;
-    height: 90px;
-    padding: 10px 0px 0px 0px;
-    width: 100px;
-
+  float: left;
+  height: 90px;
+  padding: 10px 0px 0px 0px;
+  width: 100px;
 }
 
-
 .portrait:hover {
-    transform: scale(1.5, 1.5);
+  transform: scale(1.5, 1.5);
 }
 
 @keyframes shake {
-    0% {
-        transform: translate(1px, 1px) rotate(0deg);
-    }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
 
-    10% {
-        transform: translate(-1px, -1px) rotate(-1deg);
-    }
+  10% {
+    transform: translate(-1px, -1px) rotate(-1deg);
+  }
 
-    20% {
-        transform: translate(-1px, 0px) rotate(1deg);
-    }
+  20% {
+    transform: translate(-1px, 0px) rotate(1deg);
+  }
 
-    30% {
-        transform: translate(1px, 1px) rotate(0deg);
-    }
+  30% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
 
-    40% {
-        transform: translate(1px, -1px) rotate(1deg);
-    }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
 
-    50% {
-        transform: translate(-1px, 2px) rotate(-1deg);
-    }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
 
-    60% {
-        transform: translate(-1, 1px) rotate(0deg);
-    }
+  60% {
+    transform: translate(-1, 1px) rotate(0deg);
+  }
 
-    70% {
-        transform: translate(1px, 1px) rotate(-1deg);
-    }
+  70% {
+    transform: translate(1px, 1px) rotate(-1deg);
+  }
 
-    80% {
-        transform: translate(-1px, -1px) rotate(1deg);
-    }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
 
-    90% {
-        transform: translate(1px, 1px) rotate(0deg);
-    }
+  90% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
 
-    100% {
-        transform: translate(1px, -1px) rotate(-1deg);
-    }
+  100% {
+    transform: translate(1px, -1px) rotate(-1deg);
+  }
 }
 
 .right {
-    background-color: rgb(60, 60, 60);
-    bottom: 0;
-    float: right;
-    margin-left: 75%;
-    position: fixed;
-    top: 0;
-    width: 25%;
+  background-color: rgb(60, 60, 60);
+  bottom: 0;
+  float: right;
+  margin-left: 75%;
+  position: fixed;
+  top: 0;
+  width: 25%;
 }
 
 .main {
-    height: auto;
-    margin: 0 5% 0 5%;
-    width: 90%;
+  height: auto;
+  margin: 0 5% 0 5%;
+  width: 90%;
 }
 
-.main>img {
-    height: auto;
-    margin: 5% 0 5% 0;
-    width: 100%;
+.main > img {
+  height: auto;
+  margin: 5% 0 5% 0;
+  width: 100%;
 }
-
 
 .main div {
-    color: rgb(211, 208, 201);
+  color: rgb(211, 208, 201);
 }
 
 img {
-    height: 60px;
-
+  height: 60px;
 }
 
 .logo {
-    float: right;
-    height: auto;
-    padding: 0px 10px 0px 0px;
-    width: 20px;
+  float: right;
+  height: auto;
+  padding: 0px 10px 0px 0px;
+  width: 20px;
 }
 
 .nameParagraph {
-    color: rgb(211, 208, 201);
-    font-size: 20px;
+  color: rgb(211, 208, 201);
+  font-size: 20px;
 }
 
 #titleParagraph {
-    color: rgb(211, 208, 201);
-    font-family: 'MyFont';
-    font-size: 20px;
-    margin: 10% 10% 10% 10%;
-    position: relative;
-    text-align: center;
+  color: rgb(211, 208, 201);
+  font-family: "MyFont";
+  font-size: 20px;
+  margin: 10% 10% 10% 10%;
+  position: relative;
+  text-align: center;
 }
 
 .vsc-initialized {
-    margin: 0 0 0 0;
+  margin: 0 0 0 0;
 }
 
 .container-4 {
-
-    position: absolute;
-    bottom: 2%;
-    left: 5%;
-    overflow: hidden;
-    vertical-align: middle;
-    width: 300px;
-    white-space: nowrap;
+  position: absolute;
+  bottom: 2%;
+  left: 5%;
+  overflow: hidden;
+  vertical-align: middle;
+  width: 300px;
+  white-space: nowrap;
 }
 
 .container-4 input#searchInput {
-    width: 300px;
-    height: 50px;
-    background: #2b303b;
-    border: none;
-    font-size: 10pt;
-    float: left;
-    color: #fff;
-    padding-left: 25px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+  width: 300px;
+  height: 50px;
+  background: #2b303b;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: #fff;
+  padding-left: 25px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 #searchInput::-webkit-search-cancel-button {
-    position: relative;
-    right: 280px;
+  position: relative;
+  right: 280px;
 }
 
 .container-4 button.icon {
-    -webkit-border-top-right-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
-    -moz-border-radius-topright: 5px;
-    -moz-border-radius-bottomright: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 
-    border: none;
-    background: #232833;
-    height: 50px;
-    width: 50px;
-    color: #4f5b66;
-    opacity: 0;
-    font-size: 10pt;
+  border: none;
+  background: #232833;
+  height: 50px;
+  width: 50px;
+  color: #4f5b66;
+  opacity: 0;
+  font-size: 10pt;
 
-    -webkit-transition: all .55s ease;
-    -moz-transition: all .55s ease;
-    -ms-transition: all .55s ease;
-    -o-transition: all .55s ease;
-    transition: all .55s ease;
+  -webkit-transition: all 0.55s ease;
+  -moz-transition: all 0.55s ease;
+  -ms-transition: all 0.55s ease;
+  -o-transition: all 0.55s ease;
+  transition: all 0.55s ease;
 }
 
 .container-4:hover button.icon,
 .container-4:active button.icon,
 .container-4:focus button.icon {
-    outline: none;
-    opacity: 1;
-    margin-left: -50px;
+  outline: none;
+  opacity: 1;
+  margin-left: -50px;
 }
 
 .container-4:hover button.icon:hover {
-    background: white;
+  background: white;
 }
